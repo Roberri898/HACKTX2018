@@ -80,7 +80,8 @@
       <td>{{row['departureTime']}}</td>
       <td>
       <form method="GET" action="/purchase">
-        	<input type="hidden" value="{{row['_id']}}" name="id">
+          <input type="hidden" value="{{row['departureTime']}}" name="time">
+        	<input type="hidden" value="{{row['flightNumber']}}" name="flightNumber">
             <input class="btn btn-primary" type="submit" value="Purchase">
         </form>
     </td>
