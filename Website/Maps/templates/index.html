@@ -8,7 +8,8 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        height: 50%;
+        width: 50%
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -26,7 +27,8 @@
       var infowindow;
 
       function initMap() {
-        var pyrmont = {lat: 30.2672, lng: -97.7431};
+
+        var pyrmont = {lat: {%lats%}, lng: {%lot%}};
 
         map = new google.maps.Map(document.getElementById('map'), {
           center: pyrmont,
