@@ -22,7 +22,7 @@ def convertTemp(temp):
     f = temp *9/5 - 459.67
     c = temp - 273.15
 
-    return "{}°F | {}°C".format(int(f), int(c))
+    return "{}F | {}C".format(int(f), int(c))
 
 
 def parseFlightList(flightData):

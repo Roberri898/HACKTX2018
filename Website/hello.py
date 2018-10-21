@@ -47,10 +47,15 @@ def search():
     Arriving = request.args.get("Arriving")
     Departing = request.args.get("Departing")
     Date = request.args.get("Date")
+    
     URL = "http://localhost:3030/flights?origin=" + Departing + "&destination=" + Arriving + "&date=" + Date
     r = requests.get(URL)
     parsedFlightList = functions.parseFlightList(r.content)
-    return render_template("search.html", list=parsedFlightList, url=URL)
+    date = parsedFlightList[0]['departureTime']
+    time = date[11:16]
+    date = date[:10]
+
+    return render_template("search.html", list=parsedFlightList, url=URL, time = time, date = date)
 
 
 
