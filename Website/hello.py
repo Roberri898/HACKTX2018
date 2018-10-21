@@ -36,7 +36,10 @@ def user_login():
 
 @app.route('/reserve')
 def reserve():
-	return render_template("reserve.html")
+    if 'username' in session:
+        return render_template("reserve.html")
+    else:
+        return redirect(url_for('home'))
 
 @app.route('/search', methods=['GET'])
 def search():
