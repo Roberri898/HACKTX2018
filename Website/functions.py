@@ -45,6 +45,6 @@ def flightIdAndDateToCoordinates(flightID,date):
 	
 
 	lat = json3["latitude"]
- 	lon = json3["longitude"]
+	lon = json3["longitude"]
 
 	return {'latitude':str(lat), 'longitude':str(lon)}

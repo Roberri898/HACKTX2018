@@ -43,14 +43,13 @@ def reserve():
 
 @app.route('/search', methods=['GET'])
 def search():
-	Arriving = request.args.get("Arriving")
-	Departing = request.args.get("Departing")
-	Date = request.args.get("Date")
-	URL = "http://localhost:3030/flights?origin=" + Departing + "&destination=" + Arriving + "&date=" + Date
-	
-	r = requests.get(URL)
-	parsedFlightList = functions.parseFlightList(r.content)
-	return render_template("search.html", list=parsedFlightList, url=URL)
+    Arriving = request.args.get("Arriving")
+    Departing = request.args.get("Departing")
+    Date = request.args.get("Date")
+    URL = "http://localhost:3030/flights?origin=" + Departing + "&destination=" + Arriving + "&date=" + Date
+    r = requests.get(URL)
+    parsedFlightList = functions.parseFlightList(r.content)
+    return render_template("search.html", list=parsedFlightList, url=URL)
 
 
 @app.route('/purchase', methods=['GET'])
