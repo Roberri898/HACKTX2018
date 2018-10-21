@@ -28,5 +28,5 @@ def do_admin_login():
 @app.route('/logout')
 def logout():
     session.pop('username',None)
-    return redirect(url_for('do_admin_login'))
+    return redirect(url_for('home'))
  
