@@ -3,6 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 import requests
 import functions
 import os
+import json
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
 
@@ -74,9 +75,9 @@ def purchase():
         for x in data:
             w_date = x['dt_txt']
             if date == w_date[:10]:
-                time = convertTime(w_date[11:-3])
+                time = functions.convertTime(w_date[11:-3])
                 description = x['weather'][0]['description']
-                temp = convertTemp(float(x['main']['temp']))
+                temp = functions.convertTemp(float(x['main']['temp']))
                 t = (time, description, temp)
                 w_data.append(t)
 
@@ -101,9 +102,9 @@ def getData(year=2018, month=10, day=22):
         for x in data:
             w_date = x['dt_txt']
             if date == w_date[:10]:
-                time = convertTime(w_date[11:-3])
+                time = functions.convertTime(w_date[11:-3])
                 description = x['weather'][0]['description']
-                temp = convertTemp(float(x['main']['temp']))
+                temp = functions.convertTemp(float(x['main']['temp']))
                 t = (time, description, temp)
                 w_data.append(t)
 
