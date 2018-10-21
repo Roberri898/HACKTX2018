@@ -55,8 +55,16 @@ def search():
 
 @app.route('/purchase', methods=['GET'])
 def purchase():
-	data = request.args.get("id")
-	print ("data" + data)
-	r = requests.get
-	return data
 
+	flightNumber = request.args.get("flightNumber")
+	date = request.args.get("time")
+	time = date[11:16]
+	date = date[:10]
+	latLon = functions.flightIdAndDateToCoordinates(flightNumber,date)
+	latitude = latLon['latitude']
+	longitude = latLon['longitude']
+
+	
+	# return latLon
+	data = "Lat: " + latitude + " Lon: " + longitude + "    Date: " + date 
+	return data
