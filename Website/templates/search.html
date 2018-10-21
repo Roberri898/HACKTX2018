@@ -77,7 +77,7 @@
       
       <td>{{row['origin']}}</td>
       <td>{{row['destination']}}</td>
-      <td>{{date}} - {{time}}</td>
+      <td>{{row['departureTime']}}</td>
       <td>
       <form method="GET" action="/purchase">
           <input type="hidden" value="{{row['departureTime']}}" name="time">
