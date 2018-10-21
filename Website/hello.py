@@ -52,18 +52,64 @@ def search():
     return render_template("search.html", list=parsedFlightList, url=URL)
 
 
+
 @app.route('/purchase', methods=['GET'])
 def purchase():
+    flightNumber = request.args.get("flightNumber")
+    date = request.args.get("time")
+    time = date[11:16]
+    date = date[:10]
+    latLon = functions.flightIdAndDateToCoordinates(flightNumber,date)
+    latitude = latLon['latitude']
+    longitude = latLon['longitude']
 
-	flightNumber = request.args.get("flightNumber")
-	date = request.args.get("time")
-	time = date[11:16]
-	date = date[:10]
-	latLon = functions.flightIdAndDateToCoordinates(flightNumber,date)
-	latitude = latLon['latitude']
-	longitude = latLon['longitude']
+    api_key = 'eaf63414ac97fea73d11cdea989d87b8'
+    url = "https://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&appid={}".format(latitude,longitude,api_key)
 
 	
-	# return latLon
-	data = "Lat: " + latitude + " Lon: " + longitude + "    Date: " + date 
-	return data
+	#date = "{}-{}-{}".format(year, month, day)
+    with requests.session() as sess:
+        data = json.loads(sess.get(url).text)['list']
+        w_data = []
+        for x in data:
+            w_date = x['dt_txt']
+            if date == w_date[:10]:
+                time = convertTime(w_date[11:-3])
+                description = x['weather'][0]['description']
+                temp = convertTemp(float(x['main']['temp']))
+                t = (time, description, temp)
+                w_data.append(t)
+
+    show = False
+    if(len(w_data) == 0):
+        show = True
+
+    items={"lats":30.2627,"lot":-97.7431}
+    return render_template("index.html",lot=longitude,lats=latitude,d=w_data, s = show)
+
+
+
+
+
+
+@app.route('/')
+def getData(year=2018, month=10, day=22):
+    date = "{}-{}-{}".format(year, month, day)
+    with requests.session() as sess:
+        data = json.loads(sess.get(url).text)['list']
+        w_data = []
+        for x in data:
+            w_date = x['dt_txt']
+            if date == w_date[:10]:
+                time = convertTime(w_date[11:-3])
+                description = x['weather'][0]['description']
+                temp = convertTemp(float(x['main']['temp']))
+                t = (time, description, temp)
+                w_data.append(t)
+
+    show = False
+    if(len(w_data) == 0):
+        show = True
+
+    items={"lats":30.2627,"lot":-97.7431}
+    return render_template("index.html",lot=items["lot"],lats=items["lats"],d=w_data, s = show)

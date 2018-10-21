@@ -1,6 +1,30 @@
 import json
 import requests
 
+
+
+
+def convertTime(time):
+    _hour = int(time[:2])
+    _min = time[3:]
+    am_or_pm = "AM"
+
+    if _hour >= 12:
+        am_or_pm = "PM"
+        _hour -= 12
+    if _hour == 0:
+        _hour = 12
+        
+
+    return "{}:{}{}".format(_hour, _min,am_or_pm)
+
+def convertTemp(temp):
+    f = temp *9/5 - 459.67
+    c = temp - 273.15
+
+    return "{}°F | {}°C".format(int(f), int(c))
+
+
 def parseFlightList(flightData):
 	print(type(flightData))
 	flightJSON = json.loads(flightData)
