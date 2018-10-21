@@ -15,9 +15,9 @@ def home():
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
-    # r = requests.get('http://localhost:3030/user',params = {"email":request.form.get('username')})
-    # print(r.status_code)
-    if request.form['username']=='ok':
+    r = requests.get('http://localhost:3030/user',params = {"email":request.form.get('username')})
+    print(r.status_code)
+    if request.form['username']==request.form.get('username'):
         session['username'] = request.form['username']
         return redirect(url_for('home'))
 
