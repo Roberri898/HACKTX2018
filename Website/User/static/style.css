@@ -6,9 +6,7 @@ box-sizing: border-box;
 	outline: none;
 }
 body {
-font-family: Arial;
-background-color: #FF0000;
-padding: 50px;
+background-image: url("https://www.odt.co.nz/sites/default/files/story/2018/10/the-sun-in-the-sky.jpg");
 }
 .login {
 margin: 20px auto;
